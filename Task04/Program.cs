@@ -2,54 +2,44 @@
 //  а на выходе показывает его цифры через запятую.
 
 
-
-
-using System.Data;
-
 Console.Write("Enter number: ");
 int initNumber = Convert.ToInt32(Console.ReadLine());
 
-if (initNumber < 10)                    // Вывод числа в консоль, если оно меньше 10
+int rang = 0;
+int number = initNumber;
+while (number > 0)                          // опредеряем разрядность числа
 {
-    Console.Write(initNumber);          
+    number /= 10;
+    rang++;
 }
-else
-{
-    int rang = 0;
-    int number = initNumber;
-    while (number > 0)                  // опредеряем разрядность числа
-    {
-        number /= 10;
-        rang++;
-    }
-    Console.WriteLine($"Rang = {rang}");
+Console.WriteLine($"Rang = {rang}");
 
-    while (rang > 0)                         // 4
+while (rang > 0)                            // Цикл по разрядам числа со старшего до младшего                        
+{
+    if (rang != 1)                          // Проверка на младший разряд, что бы не вывести его в консоль с ","                         
     {
-        if (rang != 1)
+        number = initNumber;               
+        int i = 0;
+        while (i < rang)                    // Цикл для вывода в консоль каждого разряда, начиная со старшего
         {
-            number = initNumber;                // 1234
-            int i = 0;
-            while (i < rang)                    // 2 < 3
+            int digit = number % 10;        // запись в digit крайнего левого числа
+            if (i == rang - 1)              // Если условие верно, то в digit лежит число искомого разряда, выводим его в консоль
             {
-                int digit = number % 10;        // 2
-                if (i == rang - 1)
-                {
-                    Console.Write(digit);
-                    Console.Write(", ");
-                }
-                number /= 10; //1
-                i++;                            // 3       
+                Console.Write(digit);
+                Console.Write(", ");
             }
-            rang--;
+            number /= 10;                   // Отбрасываем последний разряд
+            i++;                            // Переход к следуюему разряду       
         }
-        else
-        {
+        rang--;                             // Если старший разряд найден, переходим к поиску следующего разряда ниже
+    }
+    else                                    // Вывод в консоль младшего разряда без ","
+    {
         Console.Write(initNumber % 10);
         rang--;
-        }                        // 3
     }
 }
+
 
 
 
