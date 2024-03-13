@@ -4,47 +4,51 @@
 
 
 
+using System.Data;
+
 Console.Write("Enter number: ");
 int initNumber = Convert.ToInt32(Console.ReadLine());
-if (initNumber < 0)                     // Проверка на отрицательное число
-{
-    initNumber *= -1;
-}
 
-int lastDigit = initNumber % 10;
-
-if (initNumber < 10)
+if (initNumber < 10)                    // Вывод числа в консоль, если оно меньше 10
 {
-    Console.Write(initNumber);          // Вывод числа в консоль, если оно меньше 10
+    Console.Write(initNumber);          
 }
 else
 {
-    while (initNumber > 10)
+    int rang = 0;
+    int number = initNumber;
+    while (number > 0)                  // опредеряем разрядность числа
     {
-        int rang = 1;                     // Переменная разряда числа
-        int currentNumber = initNumber;   // Переменная для сравнения, в операции поиска 0 в разряде
-        int digit = initNumber;
-        while (digit > 9)                // Нахождение числа в старшем разряде
-        {
-            if (digit / 10 != 0)
-            {
-                rang *= 10;
-                digit /= 10;
-            }
-        }
-        Console.Write($"{digit}, ");    // выаод числа из старшего разряда
-        currentNumber -= digit * rang;
-        if (currentNumber < rang / 10)  // проверка на был ли 0 в старшем разряде
-        {
-            Console.Write(0);
-            Console.Write(", ");
-        }
-        initNumber -= digit * rang;     // вычитание из входного числа старшего разряда
+        number /= 10;
+        rang++;
     }
-    if (lastDigit != 0)
+    Console.WriteLine($"Rang = {rang}");
+
+    while (rang > 0)                         // 4
     {
-        Console.Write(lastDigit);       // вывод младнего разряда без "," , если он не 0
-    }          
+        if (rang != 1)
+        {
+            number = initNumber;                // 1234
+            int i = 0;
+            while (i < rang)                    // 2 < 3
+            {
+                int digit = number % 10;        // 2
+                if (i == rang - 1)
+                {
+                    Console.Write(digit);
+                    Console.Write(", ");
+                }
+                number /= 10; //1
+                i++;                            // 3       
+            }
+            rang--;
+        }
+        else
+        {
+        Console.Write(initNumber % 10);
+        rang--;
+        }                        // 3
+    }
 }
 
 
