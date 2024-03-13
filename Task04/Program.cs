@@ -6,25 +6,25 @@
 
 Console.Write("Enter number: ");
 int initNumber = Convert.ToInt32(Console.ReadLine());
-if (initNumber < 0)
+if (initNumber < 0)                     // Проверка на отрицательное число
 {
     initNumber *= -1;
 }
 
 int lastDigit = initNumber % 10;
-int digit = initNumber;
 
 if (initNumber < 10)
 {
-    Console.Write(initNumber);
+    Console.Write(initNumber);          // Вывод числа в консоль, если оно меньше 10
 }
 else
 {
     while (initNumber > 10)
     {
-        int rang = 1;
-        digit = initNumber;
-        while (digit > 9)
+        int rang = 1;                     // Переменная разряда числа
+        int currentNumber = initNumber;   // Переменная для сравнения, в операции поиска 0 в разряде
+        int digit = initNumber;
+        while (digit > 9)                // Нахождение числа в старшем разряде
         {
             if (digit / 10 != 0)
             {
@@ -32,10 +32,19 @@ else
                 digit /= 10;
             }
         }
-        Console.Write($"{digit}, ");
-        initNumber -= digit * rang;
+        Console.Write($"{digit}, ");    // выаод числа из старшего разряда
+        currentNumber -= digit * rang;
+        if (currentNumber < rang / 10)  // проверка на был ли 0 в старшем разряде
+        {
+            Console.Write(0);
+            Console.Write(", ");
+        }
+        initNumber -= digit * rang;     // вычитание из входного числа старшего разряда
     }
-    Console.Write(lastDigit);
+    if (lastDigit != 0)
+    {
+        Console.Write(lastDigit);       // вывод младнего разряда без "," , если он не 0
+    }          
 }
 
 
