@@ -12,7 +12,6 @@ while (number > 0)                          // опредеряем разряд
     number /= 10;
     rang++;
 }
-Console.WriteLine($"Rang = {rang}");
 
 while (rang > 0)                            // Цикл по разрядам числа со старшего до младшего                        
 {
@@ -31,7 +30,7 @@ while (rang > 0)                            // Цикл по разрядам ч
             number /= 10;                   // Отбрасываем последний разряд
             i++;                            // Переход к следуюему разряду       
         }
-        rang--;                             // Если старший разряд найден, переходим к поиску следующего разряда ниже
+        rang--;                             // Если старший разряд найден, переходим к поиску разряда ниже
     }
     else                                    // Вывод в консоль младшего разряда без ","
     {
@@ -39,40 +38,3 @@ while (rang > 0)                            // Цикл по разрядам ч
         rang--;
     }
 }
-
-
-
-
-
-
-
-
-// using System;
-// class Program
-// {
-//     static void Main()
-//     {
-//         Console.Write("Введите натуральное число N: ");
-//         int N = Convert.ToInt32(Console.ReadLine());
-//         if (N < 10)
-//         {
-//             Console.WriteLine(N);
-//         }
-//         else
-//         {
-//             while (N > 0)
-//             {
-//                 int currentDigit = N % 10;
-//                 N /= 10;
-//                 if (N > 0)
-//                 {
-//                     Console.Write(currentDigit + ",");
-//                 }
-//                 else
-//                 {
-//                     Console.WriteLine(currentDigit);
-//                 }
-//             }
-//         }
-//     }
-// }
